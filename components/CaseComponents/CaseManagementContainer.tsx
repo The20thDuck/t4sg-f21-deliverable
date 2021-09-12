@@ -8,6 +8,7 @@ import CaseCategory from "./CaseCategory";
 import AddCaseModal from "./Modals/AddCaseModal";
 import { useQuery } from "urql";
 import AddCategoryModal from "./Modals/AddCategoryModal";
+import { TypeObject } from "@material-ui/core/styles/createPalette";
 
 /* 
   FEATURE 1 TODO:
@@ -20,7 +21,10 @@ import AddCategoryModal from "./Modals/AddCategoryModal";
 */
 export const ManagementContainerQuery = `
 query MyQuery {
-  __typename 
+  category {
+    name
+    id
+  }
 }
 `;
 // END TODO
@@ -50,7 +54,16 @@ const CaseManagementContainer: React.FC = (props) => {
           Use the data from the result of the query to render 
           a CaseCategory for every category in the response.
           Remember, the response is stored in the "data" variable!
-        */}
+        */
+          (() => {
+            if (data) {
+              console.log(data)
+              return data.category.map((c) => {
+                return <CaseCategory category_id={c.id} />
+              });
+            }
+          })()
+        }
 
         {/* END TODO */}
       </Grid>
