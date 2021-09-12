@@ -58,7 +58,7 @@ const CaseManagementContainer: React.FC = (props) => {
           (() => {
             if (data) {
               console.log(data)
-              return data.category.map((c) => {
+              return data.category.map((c: { [key: string]: number }) => {
                 return <CaseCategory category_id={c.id} />
               });
             }
